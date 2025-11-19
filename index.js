@@ -1,7 +1,7 @@
 const http = require("http");
 const fs = require("fs");
 const { error } = require("console");
-const port = 3000;
+const port = 8080;
 
 const server = http.createServer(function (req, res) {
   if (req.url === "/") {
@@ -46,20 +46,11 @@ const server = http.createServer(function (req, res) {
     });
   }
 });
-/*   fs.readFile("index.html", function (error, data) {
-    if (error) {
-      res.writeHead(404);
-      res.write("Error: page not found");
-    } else {
-      res.write(data);
-      res.end();
-    }
-  }); */
 
 server.listen(port, function (error) {
   if (error) {
     console.log("probleme !!", error);
   } else {
-    console.log("le serveur a demare sur le port:", port);
+    console.log("le serveur est ouvert sur le port:", port);
   }
 });
