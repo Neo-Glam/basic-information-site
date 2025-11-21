@@ -1,9 +1,27 @@
-const http = require("http");
-const fs = require("fs");
-const { error } = require("console");
-const port = 8080;
+const express = require("express");
+const app = express();
+const PORT = 8080;
 
-const server = http.createServer(function (req, res) {
+app.get("/",(req,res)=>{ res.sendFile(__dirname+"/index.html")})
+app.get("/about.html",(req,res)=>{ res.sendFile(__dirname+"/about.html")})
+app.get("/contact-me.html",(req,res)=>{ res.sendFile(__dirname+"/contact-me.html")})
+app.use((req,res)=>{
+  res.status(404).sendFile(__dirname+"/404.html")
+})
+
+app.listen(PORT, function (error) {
+  if (error) {
+    throw error;
+  } else {
+    console.log("le serveur est ouvert sur le port:", PORT);
+  }
+});
+
+
+/* const http = require("http");
+const fs = require("fs"); */
+
+/* const server = http.createServer(function (req, res) {
   if (req.url === "/") {
     res.writeHead(200, { "Content-Type": "text/html" });
     fs.readFile("index.html", (error, data) => {
@@ -45,12 +63,5 @@ const server = http.createServer(function (req, res) {
       res.end();
     });
   }
-});
+}); */
 
-server.listen(port, function (error) {
-  if (error) {
-    console.log("probleme !!", error);
-  } else {
-    console.log("le serveur est ouvert sur le port:", port);
-  }
-});
